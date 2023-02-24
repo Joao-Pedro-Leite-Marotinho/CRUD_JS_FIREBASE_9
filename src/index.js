@@ -1,7 +1,8 @@
 import { initializeApp } from 'firebase/app'
 import {
     getFirestore, collection, onSnapshot,
-    addDoc, deleteDoc, doc
+    addDoc, deleteDoc, doc, updateDoc,
+    getDocs
 } from 'firebase/firestore'
 
 const firebaseConfig = {
@@ -53,10 +54,27 @@ const deleteClientForm = document.getElementById('deleteform')
 deleteClientForm.addEventListener('submit', (event) => {
     event.preventDefault()
 
-    //const docRef = doc(db, 'clients', deleteClientForm.id.value)
+    const docRef = doc(db, 'clients', deleteClientForm.id.value)
 
-    deleteDoc(doc(db, 'clients', deleteClientForm.id.value))
+    deleteDoc(doc(docRef))
         .then(() => {
             deleteClientForm.reset()
         })   
+})
+
+//atualizando documentos
+const updateForm = document.querySelector('.update')
+updateForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+
+    const docRef = doc(db, 'clients', updateForm.updateid.value)
+
+    updateDoc(docRef, {
+        name: updateForm.updatenome.value,
+        email: updateForm.updateemail.value,
+        address: updateForm.updateaddress.value,
+    })
+    .then(() => {
+        updateForm.reset()
+    })
 })
