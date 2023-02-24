@@ -37,8 +37,23 @@ getDocs(colRef)
     })
 
 //adicionando documentos
+
+// $("#clientform").on("submit", function (event) {
+//     event.preventDefault()
+
+//     addDoc(colRef, {
+//     name: addClientForm.nome.value,
+//     email: addClientForm.email.value,
+//     address: addClientForm.address.value,
+//     })
+//     .then( () => {
+//         addClientForm.reset()
+//     })
+    
+// })
+
 const addClientForm = document.getElementById('clientform')
-addClientForm.addEventListener('click', (event) => {
+addClientForm.addEventListener('submit', (event) => {
     event.preventDefault()
 
     addDoc(colRef, {
@@ -51,9 +66,23 @@ addClientForm.addEventListener('click', (event) => {
     })
 })
 
+
 //deletando documentos
+
+// $("#deleteform").on("submit", function (event) {
+//     event.preventDefault()
+
+//     const docRef = doc(db, 'clients', deleteClientForm.id.value)
+
+//     deleteDoc(docRef)
+//         .then(() => {
+//             deleteClientForm.reset()
+//         })
+
+// })
+
 const deleteClientForm = document.getElementById('deleteform')
-deleteClientForm.addEventListener('click', (event) => {
+deleteClientForm.addEventListener('submit', (event) => {
     event.preventDefault()
 
     const docRef = doc(db, 'clients', deleteClientForm.id.value)
