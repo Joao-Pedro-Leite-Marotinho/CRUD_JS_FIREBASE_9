@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import {
-    getFirestore, collection, getDocs,
+    getFirestore, collection, onSnapshot,
     addDoc, deleteDoc, doc
 } from 'firebase/firestore'
 
@@ -23,35 +23,16 @@ const db = getFirestore()
 const colRef = collection(db, 'clients')
 
 //capturando os dados do banco
-getDocs(colRef)
-    .then((snapshot) => {
-        //console.log(snapshot.docs)
-        let clients = []
-        snapshot.docs.forEach((doc) => {
-            clients.push({ ...doc.data(), id: doc.id })
-        })
-        console.log(clients)
+onSnapshot(colRef, (snapshot) => {
+    let clients = []
+    snapshot.docs.forEach((doc) => {
+        clients.push({ ...doc.data(), id: doc.id })
     })
-    .catch(err => {
-        console.log(err.message)
-    })
+    console.log(clients)
+})
+
 
 //adicionando documentos
-
-// $("#clientform").on("submit", function (event) {
-//     event.preventDefault()
-
-//     addDoc(colRef, {
-//     name: addClientForm.nome.value,
-//     email: addClientForm.email.value,
-//     address: addClientForm.address.value,
-//     })
-//     .then( () => {
-//         addClientForm.reset()
-//     })
-    
-// })
-
 const addClientForm = document.getElementById('clientform')
 addClientForm.addEventListener('submit', (event) => {
     event.preventDefault()
@@ -68,26 +49,13 @@ addClientForm.addEventListener('submit', (event) => {
 
 
 //deletando documentos
-
-// $("#deleteform").on("submit", function (event) {
-//     event.preventDefault()
-
-//     const docRef = doc(db, 'clients', deleteClientForm.id.value)
-
-//     deleteDoc(docRef)
-//         .then(() => {
-//             deleteClientForm.reset()
-//         })
-
-// })
-
 const deleteClientForm = document.getElementById('deleteform')
 deleteClientForm.addEventListener('submit', (event) => {
     event.preventDefault()
 
-    const docRef = doc(db, 'clients', deleteClientForm.id.value)
+    //const docRef = doc(db, 'clients', deleteClientForm.id.value)
 
-    deleteDoc(docRef)
+    deleteDoc(doc(db, 'clients', deleteClientForm.id.value))
         .then(() => {
             deleteClientForm.reset()
         })   
