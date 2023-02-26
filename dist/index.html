@@ -15,13 +15,16 @@
           <span class="text-light bg-dark">Formulário clientes</span>
         </div>
     </nav>
-    <div class="container">
-        <div class="row g-2  my-5">
+
+    <div class="container ">
+        
+        <div class="row g-2 my-5 justify-content-center">
+
             <div class="col-6">
 
                 <form id="clientform">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Nome</label>
+                        <label for="nome" class="form-label">Nome</label>
                         <input type="text" class="form-control" name="nome" placeholder="Your name" />
                     </div>
                     <div class="mb-3">
@@ -36,45 +39,90 @@
                         <button type="submit" class="btn btn-primary" id="insertbtn">Create</button>
                     </div>
                 </form>
-        
-                <form id="deleteform">
-                    <div class="mb-3">
-                        <label for="del" class="form-label">Deletar</label>
-                        <input type="text" class="form-control" name="del" placeholder="ID do documento"/>
-                    </div>
-                    <div class="mb-3">
-                        <button type="submit" class="btn btn-primary" name="id" id="deletebtn">Delete</button>
-                    </div>
-                </form>
 
             </div>
 
-            <div class="col-6">
+            <div class="row g-2 justify-content-center">
+                
+                <div class="col-6">
 
-                <form id="updateform" class="update">
-                    <div class="mb-3">
-                        <label for="updateid" class="form-label">Atualizar documento</label>
-                        <input type="text" class="form-control" name="updateid" placeholder="ID string"/>
-                    </div>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Nome</label>
-                        <input type="text" class="form-control" name="updatenome" placeholder="Name" />
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" name="updateemail" placeholder="Email" />
-                    </div>
-                    <div class="mb-3">
-                        <label for="address" class="form-label">Endereço</label>
-                        <input type="text" class="form-control" name="updateaddress" placeholder="Address" />
-                    </div>
-                    <div class="mb-3">
-                        <button type="submit" class="btn btn-primary" name="searchid" id="searchbtn">update</button>
-                    </div>
-                </form>
+                    <form id="deleteform">
+                        <div class="mb-3">
+                            <label for="del" class="form-label">Deletar</label>
+                            <input type="text" class="form-control" name="del" placeholder="ID do documento"/>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary" name="id" id="deletebtn">Delete</button>
+                        </div>
+                    </form>
+
+                </div>
+            
+            </div>
+
+           <div class="row g-2 justify-content-center">
+
+                <div class="col-6">
+
+                    <form id="updateform" class="update">
+                        <div class="mb-3">
+                            <label for="updateid" class="form-label">Atualizar documento</label>
+                            <input type="text" class="form-control" name="updateid" id="updateid" placeholder="ID string"/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="updatenome" class="form-label">Nome</label>
+                            <input type="text" class="form-control" name="updatenome" placeholder="Name" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="updateemail" class="form-label">Email</label>
+                            <input type="email" class="form-control" name="updateemail" placeholder="Email" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="updateaddress" class="form-label">Endereço</label>
+                            <input type="text" class="form-control" name="updateaddress" placeholder="Address" />
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary" name="searchid" id="searchbtn">update</button>
+                        </div>
+                    </form>
+
+                </div>
 
             </div>
+
+            <div class="row g-2 justify-content-center">
+
+                <div class="col-6">
+                    <form id="findform">
+                        <div class="mb-3">
+                            <label for="findid" class="form-label">Pesquisar</label>
+                            <input type="text" class="form-control" name="findid" placeholder="ID do documento"/>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary" name="findid" id="findbtn">Pesquisar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="row g-2 justify-content-center">
+                <div class="col-6">
+
+                    <table class="table table-dark">
+                        <thead>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                        </thead>
+                        <tbody id="tbody1"></tbody>
+                    </table>
+
+                </div>
+            </div>
+
         </div>
+
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
