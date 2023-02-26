@@ -8,6 +8,8 @@ import {
   doc,
   updateDoc,
   getDoc,
+  query,
+  where
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -52,61 +54,76 @@ addClientForm.addEventListener("submit", (event) => {
 });
 
 //deletando documentos
-const deleteClientForm = document.getElementById("deleteform");
+const deleteClientForm = document.querySelector("#deleteform");
 deleteClientForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const docRefB = doc(db, "clients", deleteClientForm.id.value);
+ const docId = deleteClientForm.elements['del'].value
 
-  deleteDoc(doc(docRefB)).then(() => {
+  deleteDoc(doc(db, 'clients', docId)).then(() => {
     deleteClientForm.reset();
-  });
+  })
+
 });
 
 //atualizando documentos
-const updateForm = document.getElementById("updateform");
+const updateForm = document.querySelector("#updateform");
 updateForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const docRef = doc(db, "clients", updateForm.updateid.value);
-
-  updateDoc(docRef, {
-    name: updateForm.updatenome.value,
-    email: updateForm.updateemail.value,
-    address: updateForm.updateaddress.value,
-  }).then(() => {
-    updateForm.reset();
-  });
+  const docId = updateForm.elements['updateid'].value
+  const name = updateForm.elements['updatenome'].value
+  const email = updateForm.elements['updateemail']
+  const address = updateForm.elements['updateaddress'].value
+  
+  try{
+    const docRef = doc(db, 'clients', docId)
+    updateDoc(docRef, {name, email, address})
+    console.log(`Documento ID ${docId} atualizado com sucesso.`)
+  }
+  catch(error){
+    console.error("Erro ao atualizar o documento" + error)
+  }
+  
 });
 
 //pesquisando docs
-const findForm = document.getElementById("findform");
-findForm.addEventListener("submit", (event) => {
+const findForm = document.querySelector('#findform')
+const table = document.querySelector('#table tbody')
+findForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  const docRef = doc(db, "clients", findForm.updateid.value);
+  const docId = findForm.elements['findid'].value
 
-  const docSnap = getDoc(docRef);
-
-  let tbody = document.getElementById("tbody1");
-
-  function addItem() {
-    let trow = document.createElement("tr");
-    let td1 = document.createElement("td");
-    let td2 = document.createElement("td");
-    let td3 = document.createElement("td");
-
-    td1.innerHTML = docSnap.name;
-    td2.innerHTML = docSnap.email;
-    td3.innerHTML = docSnap.address;
-
-    trow.appendChild(td1);
-    trow.appendChild(td2);
-    trow.appendChild(td3);
-
-    tbody.appendChild(trow);
+  try{
+    const docRef = doc(db, 'clients', docId)
+    const docSnap = await getDoc(docRef)
+    if(docSnap.exists()){
+        const docData = docSnap.data()
+        console.log(`Documento ID ${docId} encontrado: `, docData)
+        
+        //exibir dados na tela
+        const row = document.createElement('tr')
+        const idCell = document.createElement('td')
+        idCell.textContent = docId
+        row.appendChild(idCell)
+        const nameCell = document.createElement('td')
+        nameCell.textContent = docData.name
+        row.appendChild(nameCell)
+        const emailCell = document.createElement('td')
+        emailCell.textContent = docData.email
+        row.appendChild(emailCell)
+        const addressCell = document.createElement('td')
+        phoneCell.textContent = docData.address
+        row.appendChild(addressCell)
+        table.appendChild(row)
+    }
+    else{
+        console.log(`Documento ${docId} não encontrado`)
+    }
   }
-
-  addItem()
+  catch(error){
+    console.error('Erro ao pesquisar documento: ', error)
+  }
 
 });

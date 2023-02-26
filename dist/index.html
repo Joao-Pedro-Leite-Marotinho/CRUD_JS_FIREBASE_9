@@ -49,7 +49,7 @@
                     <form id="deleteform">
                         <div class="mb-3">
                             <label for="del" class="form-label">Deletar</label>
-                            <input type="text" class="form-control" name="del" placeholder="ID do documento"/>
+                            <input type="text" class="form-control" name="del" id="del" placeholder="ID do documento"/>
                         </div>
                         <div class="mb-3">
                             <button type="submit" class="btn btn-primary" name="id" id="deletebtn">Delete</button>
@@ -71,15 +71,15 @@
                         </div>
                         <div class="mb-3">
                             <label for="updatenome" class="form-label">Nome</label>
-                            <input type="text" class="form-control" name="updatenome" placeholder="Name" />
+                            <input type="text" class="form-control" name="updatenome" id="updatenome" placeholder="Name" />
                         </div>
                         <div class="mb-3">
                             <label for="updateemail" class="form-label">Email</label>
-                            <input type="email" class="form-control" name="updateemail" placeholder="Email" />
+                            <input type="email" class="form-control" name="updateemail" id="updateemail" placeholder="Email" />
                         </div>
                         <div class="mb-3">
                             <label for="updateaddress" class="form-label">Endereço</label>
-                            <input type="text" class="form-control" name="updateaddress" placeholder="Address" />
+                            <input type="text" class="form-control" name="updateaddress" id="updateaddress" placeholder="Address" />
                         </div>
                         <div class="mb-3">
                             <button type="submit" class="btn btn-primary" name="searchid" id="searchbtn">update</button>
@@ -96,7 +96,7 @@
                     <form id="findform">
                         <div class="mb-3">
                             <label for="findid" class="form-label">Pesquisar</label>
-                            <input type="text" class="form-control" name="findid" placeholder="ID do documento"/>
+                            <input type="text" class="form-control" name="findid" id="findid" placeholder="ID do documento"/>
                         </div>
                         <div class="mb-3">
                             <button type="submit" class="btn btn-primary" name="findid" id="findbtn">Pesquisar</button>
@@ -109,8 +109,9 @@
             <div class="row g-2 justify-content-center">
                 <div class="col-6">
 
-                    <table class="table table-dark">
+                    <table class="table table-dark" id="table">
                         <thead>
+                            <th>ID</th>
                             <th>Nome</th>
                             <th>Email</th>
                             <th>Address</th>
