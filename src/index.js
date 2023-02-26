@@ -90,27 +90,23 @@ findForm.addEventListener("submit", (event) => {
 
   let tbody = document.getElementById("tbody1");
 
-  function addItem(name, email, address) {
+  function addItem() {
     let trow = document.createElement("tr");
     let td1 = document.createElement("td");
     let td2 = document.createElement("td");
     let td3 = document.createElement("td");
 
-    onSnapshot(colRef, (snapshot) => {
-      let clients = [];
-      snapshot.docs.forEach((doc) => {
-        clients.push({ ...doc.data(), id: doc.id });
-      });
-      
-      td1.innerHTML = clients.name;
-      td2.innerHTML = clients.email;
-      td3.innerHTML = clients.address;
+    td1.innerHTML = docSnap.name;
+    td2.innerHTML = docSnap.email;
+    td3.innerHTML = docSnap.address;
 
-      trow.appendChild(td1);
-      trow.appendChild(td2);
-      trow.appendChild(td3);
+    trow.appendChild(td1);
+    trow.appendChild(td2);
+    trow.appendChild(td3);
 
-      tbody.appendChild(trow);
-    });
+    tbody.appendChild(trow);
   }
+
+  addItem()
+
 });
