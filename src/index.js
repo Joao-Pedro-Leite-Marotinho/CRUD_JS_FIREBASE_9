@@ -7,9 +7,7 @@ import {
   deleteDoc,
   doc,
   updateDoc,
-  getDoc,
-  query,
-  where
+  getDoc
 } from "firebase/firestore";
 
 const firebaseConfig = {
